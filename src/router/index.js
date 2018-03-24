@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '../components/HelloWorld'
 import HomeTimeline from '../components/timelines/home'
 import PublicTimeline from '../components/timelines/public'
 

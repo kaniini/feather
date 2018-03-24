@@ -21,6 +21,13 @@ const i18n = new VueI18n({
   messages
 })
 
+const EventBus = new Vue()
+Object.defineProperties(Vue.prototype, {
+  $bus: {
+    get () { return EventBus }
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -31,3 +38,5 @@ new Vue({
   },
   template: '<App/>'
 })
+
+export default EventBus

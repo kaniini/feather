@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import EventBus from '../main'
 
 const LOGIN_ENDPOINT = '/oauth/token'
 const TIMELINES_ENDPOINT = '/api/v1/timelines/'
@@ -41,6 +42,7 @@ export default {
         return response.json()
       }).then((response) => {
         TOKEN = response
+        EventBus.$emit('api.login', {})
         resolve()
       })
     })

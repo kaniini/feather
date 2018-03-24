@@ -7,7 +7,6 @@ class TimelineFetcher {
   }
 
   fetch (withReplies) {
-    console.log('fetching activities for', this.timeline)
     return APIService.fetchTimeline(this.timeline, (activities) => {
       if (withReplies) {
         return this.callback(activities)

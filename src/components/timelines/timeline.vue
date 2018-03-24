@@ -17,6 +17,9 @@ export default {
   methods: {
     fetchCallback (activities) {
       this.timeline = activities
+    },
+    refetchCallback () {
+      this._fetcher.fetch(false)
     }
   },
   data () {
@@ -25,6 +28,8 @@ export default {
   mounted () {
     this._fetcher = new TimelineFetcher(this.tid, this.fetchCallback)
     this._fetcher.fetch(false)
+
+    this.$bus.$on('api.login', this.refetchCallback)
   }
 }
 </script>

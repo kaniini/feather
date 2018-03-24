@@ -3,7 +3,7 @@
     <login-form />
 
     <div class="module">
-      <router-link to="/home">{{$t("timeline.home")}}</router-link>
+      <router-link to="/home" v-if="isLoggedIn">{{$t("timeline.home")}}</router-link>
       <router-link to="/public">{{$t("timeline.public")}}</router-link>
     </div>
   </nav>
@@ -14,8 +14,17 @@ import LoginForm from './login-form'
 
 const Sidebar = {
   name: 'Sidebar',
+  data () {
+    return {isLoggedIn: false}
+  },
   components: {
     LoginForm
+  },
+  methods: {
+    handleLoggedIn () { this.isLoggedIn = true }
+  },
+  mounted () {
+    this.$bus.$on('api.login', this.handleLoggedIn)
   }
 }
 
