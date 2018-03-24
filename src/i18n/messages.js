@@ -11,6 +11,7 @@ const en = {
   'timeline': {
     'home': 'Home',
     'public': 'Public timeline',
+    'collection': 'Collection',
     'compose': {
       'placeholder': 'What is on your mind?',
       'submit': 'Submit'

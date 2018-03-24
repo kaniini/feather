@@ -18,7 +18,9 @@ class TimelineFetcher {
   }
 
   fetchCollection (withReplies) {
-    console.log('implement me!')
+    return APIService.fetchCollection(this.timeline, (activities) => {
+      return this.callback(activities.filter(activity => activity.in_reply_to_id === null))
+    })
   }
 
   fetch (withReplies) {

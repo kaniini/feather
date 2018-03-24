@@ -71,6 +71,21 @@ export default {
 
     makeAPIRequest(uri).then((response) => { return response.json() }).then(callback)
   },
+  fetchCollection (object, callback, since) {
+    let baseURI = `${STATUSES_ENDPOINT}/${object}`
+    let basePromise = makeAPIRequest(baseURI).then((response) => {
+      return response.json()
+    })
+
+    let childrenURI = `${STATUSES_ENDPOINT}/${object}/context`
+    let childrenPromise = makeAPIRequest(childrenURI).then((response) => {
+      return response.json()
+    })
+
+    Promise.all([basePromise, childrenPromise]).then(([base, children]) => {
+      callback(Array.concat([base], children.descendants))
+    })
+  },
   fetchChildren (object, callback) {
     makeAPIRequest(STATUSES_ENDPOINT + '/' + object + '/context').then((response) => { return response.json() }).then(callback)
   },
