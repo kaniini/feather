@@ -6,6 +6,7 @@ const TIMELINES_ENDPOINT = '/api/v1/timelines/'
 const STATUSES_ENDPOINT = '/api/v1/statuses'
 
 var TOKEN
+var AP_ACTOR
 
 /* wrapper to inject TOKEN if set */
 let makeAPIRequest = (endpoint, params) => {
@@ -18,6 +19,20 @@ let makeAPIRequest = (endpoint, params) => {
   }
 
   return fetch('https://pleroma.dereferenced.org' + endpoint, params)
+}
+
+/* this way we know who we are */
+let fetchAPActor = (info) => {
+  makeAPIRequest('/users/' + info.name, {
+    headers: {
+      'accept': 'application/activity+json'
+    }
+  }).then((response) => {
+    return response.json()
+  }).then((response) => {
+    AP_ACTOR = response
+    EventBus.$emit('api.learned-ap-actor', AP_ACTOR)
+  })
 }
 
 export default {
@@ -42,13 +57,14 @@ export default {
         return response.json()
       }).then((response) => {
         TOKEN = response
-        EventBus.$emit('api.login', {})
+        EventBus.$emit('api.login', {name: user})
+        fetchAPActor({name: user})
         resolve()
       })
     })
   },
   fetchTimeline (timeline, callback, since) {
-    let uri = TIMELINES_ENDPOINT + timeline + '?limit=50'
+    let uri = TIMELINES_ENDPOINT + timeline + '?limit=150'
     if (since) {
       uri += '&since_id=' + since
     }
@@ -68,8 +84,40 @@ export default {
       body: payload,
       method: 'POST',
       headers: {
+        'accept': 'application/json',
         'content-type': 'application/json'
       }
-    }).then((response) => { EventBus.$emit('api.posted-message', response.json()) })
+    }).then((response) => {
+      return response.json()
+    }).then((response) => {
+      EventBus.$emit('api.posted-message', response)
+    })
+  },
+  getAPActor () {
+    return AP_ACTOR
+  },
+  like (object) {
+    makeAPIRequest(STATUSES_ENDPOINT + '/' + object + '/favourite', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json'
+      }
+    }).then((response) => {
+      return response.json()
+    }).then((response) => {
+      EventBus.$emit('api.like', response)
+    })
+  },
+  announce (object) {
+    makeAPIRequest(STATUSES_ENDPOINT + '/' + object + '/reblog', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json'
+      }
+    }).then((response) => {
+      return response.json()
+    }).then((response) => {
+      EventBus.$emit('api.announce', response)
+    })
   }
 }

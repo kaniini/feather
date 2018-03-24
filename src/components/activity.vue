@@ -16,9 +16,13 @@
 
       <div class="activity-content" v-html="activity.content"></div>
 
+      <ActionBar v-bind:activity="activity" v-if="isLoggedIn" />
+
       <div class="children" v-if="children">
         <ChildActivity v-for="child in children" v-bind:key="child.id" v-bind:activity="child" />
       </div>
+
+      <ReplyComposer v-bind:activity="activity" v-if="replying" />
     </div>
   </article>
   <article v-else-if="activity.reblog !== null">
@@ -41,15 +45,19 @@
         <small> &mdash; @{{ activity.reblog.account.acct }}</small>
       </div>
 
-      <div class="media-attachments" v-if="activity.media_attachments">
-        <MediaAttachment v-for="attachment in activity.media_attachments" v-bind:key="attachment.id" v-bind:attachment="attachment" />
+      <div class="media-attachments" v-if="activity.reblog.media_attachments">
+        <MediaAttachment v-for="attachment in activity.reblog.media_attachments" v-bind:key="attachment.id" v-bind:attachment="attachment" />
       </div>
 
       <div class="activity-content" v-html="activity.reblog.content"></div>
 
+      <ActionBar v-bind:activity="activity.reblog" v-if="isLoggedIn" />
+
       <div class="children" v-if="children">
         <ChildActivity v-for="child in children" v-bind:key="child.id" v-bind:activity="child" />
       </div>
+
+      <ReplyComposer v-bind:activity="activity.reblog" v-if="replying" />
     </div>
   </article>
 </template>
@@ -58,23 +66,43 @@
 import MediaAttachment from './media-attachment'
 import ChildActivity from './activity-child'
 import APIService from '../services/api'
+import ReplyComposer from './reply-composer'
+import ActionBar from './action-bar'
 
 export default {
   name: 'Activity',
-  components: { MediaAttachment, ChildActivity },
+  components: { MediaAttachment, ChildActivity, ReplyComposer, ActionBar },
   props: ['activity'],
   data () {
     return {
-      children: []
+      children: [],
+      isLoggedIn: APIService.isLoggedIn(),
+      replying: false
     }
   },
   methods: {
     receiveChildren (children) {
-      this.children = children.descendants
+      let ourId = this.activity.reblog ? this.activity.reblog.id : this.activity.id
+      this.children = children.descendants.filter((child) => child.in_reply_to_id === Number.parseInt(ourId))
+    },
+    handleUpdate (postInfo) {
+      let ourId = this.activity.reblog ? this.activity.reblog.id : this.activity.id
+      if (postInfo.in_reply_to_id === Number.parseInt(ourId)) {
+        APIService.fetchChildren(this.activity.reblog ? this.activity.reblog.id : this.activity.id, this.receiveChildren)
+      }
+      this.replying = false
     }
   },
   mounted () {
     APIService.fetchChildren(this.activity.reblog ? this.activity.reblog.id : this.activity.id, this.receiveChildren)
+    this.$bus.$on('api.posted-message', this.handleUpdate)
+    this.$bus.$on('activity.replying', (activity) => {
+      let ourId = this.activity.reblog ? this.activity.reblog.id : this.activity.id
+      if (activity.id !== ourId) {
+        return
+      }
+      this.replying = true
+    })
   }
 }
 </script>

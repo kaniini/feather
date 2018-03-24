@@ -1,6 +1,7 @@
 <template>
   <nav id="sidebar">
-    <login-form />
+    <LoginForm v-if="!isLoggedIn" />
+    <IdentityWidget v-else-if="apActor != null" v-bind:actor="apActor" />
 
     <div class="module">
       <router-link to="/home" v-if="isLoggedIn">{{$t("timeline.home")}}</router-link>
@@ -11,20 +12,23 @@
 
 <script>
 import LoginForm from './login-form'
+import IdentityWidget from './identity-widget'
 
 const Sidebar = {
   name: 'Sidebar',
   data () {
-    return {isLoggedIn: false}
+    return {isLoggedIn: false, apActor: null}
   },
   components: {
-    LoginForm
+    LoginForm, IdentityWidget
   },
   methods: {
-    handleLoggedIn () { this.isLoggedIn = true }
+    handleLoggedIn () { this.isLoggedIn = true },
+    handleAPActor (actor) { this.apActor = actor }
   },
   mounted () {
     this.$bus.$on('api.login', this.handleLoggedIn)
+    this.$bus.$on('api.learned-ap-actor', this.handleAPActor)
   }
 }
 
@@ -35,6 +39,7 @@ export default Sidebar
 .module {
   margin-top: 1em;
   font-size: 75%;
+  clear: both;
 }
 
 .module a {
