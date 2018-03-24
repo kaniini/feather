@@ -8,6 +8,8 @@ var TOKEN
 
 /* wrapper to inject TOKEN if set */
 let makeAPIRequest = (endpoint, params) => {
+  params = params || {}
+
   if (TOKEN) {
     let headers = params.headers || {}
     headers['Authorization'] = 'Bearer ' + TOKEN.access_token
@@ -53,5 +55,8 @@ export default {
   },
   fetchChildren (object, callback) {
     makeAPIRequest(STATUSES_ENDPOINT + '/' + object + '/context').then((response) => { return response.json() }).then(callback)
+  },
+  isLoggedIn () {
+    return TOKEN !== undefined
   }
 }
