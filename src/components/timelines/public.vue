@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{$t('timeline.public')}}</h2>
-    <Timeline tid="public" />
+    <Timeline tid="public" type="timeline" />
   </div>
 </template>
 

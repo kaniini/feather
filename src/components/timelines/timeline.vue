@@ -9,7 +9,7 @@ import Activity from '../activity'
 import TimelineFetcher from './timeline-fetcher'
 
 export default {
-  props: ['tid'],
+  props: ['tid', 'type'],
   name: 'Timeline',
   components: {
     Activity
@@ -26,7 +26,7 @@ export default {
     return {timeline: []}
   },
   mounted () {
-    this._fetcher = new TimelineFetcher(this.tid, this.fetchCallback)
+    this._fetcher = new TimelineFetcher(this.tid, this.type, this.fetchCallback)
     this._fetcher.fetch(false)
 
     this.$bus.$on('api.login', this.refetchCallback)
