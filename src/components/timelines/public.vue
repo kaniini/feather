@@ -1,5 +1,8 @@
 <template>
-  <Timeline tid="public" />
+  <div>
+    <h2>{{$t('timeline.public')}}</h2>
+    <Timeline tid="public" />
+  </div>
 </template>
 
 <script>
