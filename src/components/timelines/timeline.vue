@@ -30,6 +30,13 @@ export default {
     this._fetcher.fetch(false)
 
     this.$bus.$on('api.login', this.refetchCallback)
+    this.$bus.$on('api.posted-message', this.refetchCallback)
   }
 }
 </script>
+
+<style scoped>
+.timeline {
+  clear: both;
+}
+</style>

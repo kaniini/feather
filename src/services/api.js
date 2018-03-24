@@ -3,7 +3,7 @@ import EventBus from '../main'
 
 const LOGIN_ENDPOINT = '/oauth/token'
 const TIMELINES_ENDPOINT = '/api/v1/timelines/'
-const STATUSES_ENDPOINT = '/api/v1/statuses/'
+const STATUSES_ENDPOINT = '/api/v1/statuses'
 
 var TOKEN
 
@@ -60,5 +60,16 @@ export default {
   },
   isLoggedIn () {
     return TOKEN !== undefined
+  },
+  postMessage (postData) {
+    let payload = JSON.stringify(postData)
+
+    makeAPIRequest(STATUSES_ENDPOINT, {
+      body: payload,
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then((response) => { EventBus.$emit('api.posted-message', response.json()) })
   }
 }

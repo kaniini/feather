@@ -59,4 +59,20 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
 }
+
+.btn {
+  background: #eee;
+  border: none;
+  padding: 1em;
+  border-radius: 0.5em;
+  font-weight: bold;
+}
+
+.btn-small {
+  padding: 0.5em;
+}
+
+.pull-right {
+  float: right;
+}
 </style>

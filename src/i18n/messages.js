@@ -10,7 +10,11 @@ const en = {
   },
   'timeline': {
     'home': 'Home',
-    'public': 'Public timeline'
+    'public': 'Public timeline',
+    'compose': {
+      'placeholder': 'What is on your mind?',
+      'submit': 'Submit'
+    }
   }
 }
 
