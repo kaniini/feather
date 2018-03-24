@@ -46,6 +46,10 @@
       </div>
 
       <div class="activity-content" v-html="activity.reblog.content"></div>
+
+      <div class="children" v-if="children">
+        <ChildActivity v-for="child in children" v-bind:key="child.id" v-bind:activity="child" />
+      </div>
     </div>
   </article>
 </template>
@@ -70,7 +74,7 @@ export default {
     }
   },
   mounted () {
-    APIService.fetchChildren(this.activity.id, this.receiveChildren)
+    APIService.fetchChildren(this.activity.reblog ? this.activity.reblog.id : this.activity.id, this.receiveChildren)
   }
 }
 </script>
