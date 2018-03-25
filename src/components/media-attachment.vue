@@ -16,7 +16,7 @@ export default {
 }
 
 img {
-  max-width: 430px;
+  height: 300px;
   padding-right: 4px;
 }
 </style>
