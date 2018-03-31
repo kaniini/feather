@@ -28,6 +28,9 @@ class TimelineFetcher {
       return this.fetchTimeline(withReplies)
     } else if (this.type === 'collection') {
       return this.fetchCollection(withReplies)
+    } else if (this.type === 'tag-collection') {
+      this.timeline = `tag/${this.timeline}`
+      return this.fetchTimeline(withReplies)
     }
   }
 }
