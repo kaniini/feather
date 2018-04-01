@@ -9,12 +9,10 @@
 </template>
 
 <script>
-import ActivityContainer from './activity-container'
-
 export default {
   name: 'ChildActivity',
   props: ['activity'],
-  components: { ActivityContainer }
+  components: { ActivityContainer: () => import('./activity-container.vue') }
 }
 </script>
 
