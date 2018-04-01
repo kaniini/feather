@@ -1,7 +1,7 @@
 <template>
   <div class="view">
     <span class="boosted" v-if="reblog">
-      <small><i class="icon-retweet"></i>{{ activity.account.display_name }} {{$t('activity.boosted')}}</small>
+      <small><i class="icon-retweet"></i>{{ reblog.account.display_name }} {{$t('activity.boosted')}}</small>
     </span>
 
     <div class="person">
@@ -67,8 +67,6 @@ export default {
     }
   },
   mounted () {
-    console.log('activity sensitive:', this.activity.sensitive)
-    console.log('activity content advisory text:', this.activity.spoiler_text)
     APIService.fetchChildren(this.activity.reblog ? this.activity.reblog.id : this.activity.id, this.receiveChildren)
     this.$bus.$on('api.posted-message', this.handleUpdate)
     this.$bus.$on('activity.replying', (activity) => {
