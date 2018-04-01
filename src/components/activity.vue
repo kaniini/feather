@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <ActivityContainer v-bind:activity="activity.reblog || activity" v-bind:reblog="activity.reblog !== null" />
+    <ActivityContainer v-bind:reblog="activity.reblog ? activity : null" v-bind:activity="activity.reblog || activity" />
   </article>
 </template>
 
