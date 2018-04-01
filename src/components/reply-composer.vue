@@ -37,6 +37,6 @@ export default {
     return {
       apActor: APIService.getAPActor()
     }
-  },
+  }
 }
 </script>
