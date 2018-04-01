@@ -6,7 +6,9 @@ const en = {
   },
   'activity': {
     'boosted': 'boosted',
-    'liked': 'liked'
+    'liked': 'liked',
+    'expand': 'Show More',
+    'close': 'Show Less'
   },
   'timeline': {
     'home': 'Home',
@@ -14,7 +16,9 @@ const en = {
     'collection': 'Collection',
     'compose': {
       'placeholder': 'What is on your mind?',
-      'submit': 'Submit'
+      'submit': 'Submit',
+      'content_advisory': 'Content Advisory',
+      'content_advisory_text': 'Write your content advisory here'
     }
   }
 }

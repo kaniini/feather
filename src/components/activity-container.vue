@@ -13,7 +13,13 @@
       <MediaAttachment v-for="attachment in activity.media_attachments" v-bind:key="attachment.id" v-bind:attachment="attachment" v-bind:sensitive="activity.sensitive" />
     </div>
 
-    <div class="activity-content" v-html="activity.content"></div>
+    <div class="activity-content">
+      <div class="content-advisory" v-if="activity.sensitive && activity.spoiler_text">
+        {{ activity.spoiler_text }}
+        <button v-on:click="showContent ^= true" class="btn btn-small">{{ !showContent ? $t("activity.expand") : $t("activity.close") }}</button>
+      </div>
+      <div v-html="activity.content" v-if="showContent"></div>
+    </div>
 
     <ActionBar v-bind:activity="activity" v-if="isLoggedIn" />
 
@@ -40,7 +46,8 @@ export default {
     return {
       children: [],
       isLoggedIn: APIService.isLoggedIn(),
-      replying: false
+      replying: false,
+      showContent: !this.activity.sensitive || (this.activity.sensitive && !this.activity.spoiler_text)
     }
   },
   methods: {
@@ -57,6 +64,8 @@ export default {
     }
   },
   mounted () {
+    console.log('activity sensitive:', this.activity.sensitive)
+    console.log('activity content advisory text:', this.activity.spoiler_text)
     APIService.fetchChildren(this.activity.reblog ? this.activity.reblog.id : this.activity.id, this.receiveChildren)
     this.$bus.$on('api.posted-message', this.handleUpdate)
     this.$bus.$on('activity.replying', (activity) => {
@@ -77,6 +86,10 @@ export default {
 
 .children {
   margin-top: 1em;
+}
+
+.content-advisory {
+  margin-bottom: 1.5em;
 }
 </style>
 
