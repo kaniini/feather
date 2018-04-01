@@ -9,16 +9,19 @@
       <small> &mdash; @{{ activity.account.acct }}</small>
     </div>
 
-    <div class="media-attachments" v-if="activity.media_attachments">
-      <MediaAttachment v-for="attachment in activity.media_attachments" v-bind:key="attachment.id" v-bind:attachment="attachment" v-bind:sensitive="activity.sensitive" />
-    </div>
-
-    <div class="activity-content">
+    <div>
       <div class="content-advisory" v-if="activity.sensitive && activity.spoiler_text">
         {{ activity.spoiler_text }}
         <button v-on:click="showContent ^= true" class="btn btn-small">{{ !showContent ? $t("activity.expand") : $t("activity.close") }}</button>
       </div>
-      <div v-html="activity.content" v-if="showContent"></div>
+
+      <div v-if="showContent">
+        <div class="media-attachments" v-if="activity.media_attachments">
+          <MediaAttachment v-for="attachment in activity.media_attachments" v-bind:key="attachment.id" v-bind:attachment="attachment" v-bind:sensitive="activity.sensitive" />
+        </div>
+
+        <div class="activity-content" v-html="activity.content"></div>
+      </div>
     </div>
 
     <ActionBar v-bind:activity="activity" v-if="isLoggedIn" />
