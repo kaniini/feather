@@ -25,7 +25,7 @@ let makeAPIRequest = (endpoint, params) => {
 
 /* this way we know who we are */
 let fetchAPActor = (info) => {
-  makeAPIRequest('/users/' + info.name, {
+  makeAPIRequest(`/users/${info.name}`, {
     headers: {
       'accept': 'application/activity+json'
     }
@@ -71,7 +71,7 @@ export default {
     })
   },
   fetchTimeline (timeline, callback, since) {
-    let uri = TIMELINES_ENDPOINT + timeline + '?limit=150'
+    let uri = `${TIMELINES_ENDPOINT}/${timeline}?limit=150`
     if (since) {
       uri += '&since_id=' + since
     }
@@ -94,7 +94,7 @@ export default {
     })
   },
   fetchChildren (object, callback) {
-    makeAPIRequest(STATUSES_ENDPOINT + '/' + object + '/context').then((response) => { return response.json() }).then(callback)
+    makeAPIRequest(`${STATUSES_ENDPOINT}/${object}/context`).then((response) => { return response.json() }).then(callback)
   },
   isLoggedIn () {
     return TOKEN !== undefined
@@ -119,7 +119,7 @@ export default {
     return AP_ACTOR
   },
   like (object) {
-    makeAPIRequest(STATUSES_ENDPOINT + '/' + object + '/favourite', {
+    makeAPIRequest(`${STATUSES_ENDPOINT}/${object}/favourite`, {
       method: 'POST',
       headers: {
         'accept': 'application/json'
@@ -131,7 +131,7 @@ export default {
     })
   },
   announce (object) {
-    makeAPIRequest(STATUSES_ENDPOINT + '/' + object + '/reblog', {
+    makeAPIRequest(`${STATUSES_ENDPOINT}/${object}/reblog`, {
       method: 'POST',
       headers: {
         'accept': 'application/json'
