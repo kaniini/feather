@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import EventBus from '../main'
 
 const LOGIN_ENDPOINT = '/oauth/token'
@@ -7,6 +6,9 @@ const STATUSES_ENDPOINT = '/api/v1/statuses'
 
 var TOKEN
 var AP_ACTOR
+var API_BASE_URL
+var CLIENT_ID
+var CLIENT_SECRET
 
 /* wrapper to inject TOKEN if set */
 let makeAPIRequest = (endpoint, params) => {
@@ -18,7 +20,7 @@ let makeAPIRequest = (endpoint, params) => {
     params.headers = headers
   }
 
-  return fetch('https://pleroma.dereferenced.org' + endpoint, params)
+  return fetch(`${API_BASE_URL}${endpoint}`, params)
 }
 
 /* this way we know who we are */
@@ -36,6 +38,11 @@ let fetchAPActor = (info) => {
 }
 
 export default {
+  configure (cfg) {
+    API_BASE_URL = cfg.API_BASE_URL || ''
+    CLIENT_ID = cfg.CLIENT_ID
+    CLIENT_SECRET = cfg.CLIENT_SECRET
+  },
   login (user, pass) {
     return new Promise((resolve, reject) => {
       if (!user || !pass) {
@@ -47,8 +54,8 @@ export default {
       params.append('grant_type', 'password')
       params.append('name', user)
       params.append('password', pass)
-      params.append('client_id', Vue.config.CLIENT_ID)
-      params.append('client_secret', Vue.config.CLIENT_SECRET)
+      params.append('client_id', CLIENT_ID)
+      params.append('client_secret', CLIENT_SECRET)
 
       makeAPIRequest(LOGIN_ENDPOINT, {
         method: 'POST',
