@@ -11,7 +11,7 @@
       </div>
 
       <div class="media-attachments" v-if="activity.media_attachments">
-        <MediaAttachment v-for="attachment in activity.media_attachments" v-bind:key="attachment.id" v-bind:attachment="attachment" />
+        <MediaAttachment v-for="attachment in activity.media_attachments" v-bind:key="attachment.id" v-bind:attachment="attachment" v-bind:sensitive="activity.sensitive" />
       </div>
 
       <div class="activity-content" v-html="activity.content"></div>
@@ -46,7 +46,7 @@
       </div>
 
       <div class="media-attachments" v-if="activity.reblog.media_attachments">
-        <MediaAttachment v-for="attachment in activity.reblog.media_attachments" v-bind:key="attachment.id" v-bind:attachment="attachment" />
+        <MediaAttachment v-for="attachment in activity.reblog.media_attachments" v-bind:key="attachment.id" v-bind:attachment="attachment" v-bind:sensitive="activity.sensitive" />
       </div>
 
       <div class="activity-content" v-html="activity.reblog.content"></div>
