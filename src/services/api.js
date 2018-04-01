@@ -3,6 +3,7 @@ import EventBus from '../main'
 const LOGIN_ENDPOINT = '/oauth/token'
 const TIMELINES_ENDPOINT = '/api/v1/timelines/'
 const STATUSES_ENDPOINT = '/api/v1/statuses'
+const MEDIA_ENDPOINT = '/api/v1/media'
 
 var TOKEN
 var AP_ACTOR
@@ -140,6 +141,20 @@ export default {
       return response.json()
     }).then((response) => {
       EventBus.$emit('api.announce', response)
+    })
+  },
+  uploadMedia (object) {
+    let payload = new FormData()
+    payload.append('file', object)
+
+    return makeAPIRequest(MEDIA_ENDPOINT, {
+      body: payload,
+      method: 'POST',
+      headers: {
+        'accept': 'application/json'
+      }
+    }).then((response) => {
+      return response.json()
     })
   }
 }
