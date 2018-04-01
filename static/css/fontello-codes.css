@@ -4,6 +4,8 @@
 .icon-cog:before { content: '\e802'; } /* '' */
 .icon-star-empty:before { content: '\e803'; } /* '' */
 .icon-trash-empty:before { content: '\e804'; } /* '' */
+.icon-upload:before { content: '\e805'; } /* '' */
+.icon-search:before { content: '\e806'; } /* '' */
 .icon-reply:before { content: '\f112'; } /* '' */
 .icon-user-plus:before { content: '\f234'; } /* '' */
 .icon-user-times:before { content: '\f235'; } /* '' */
