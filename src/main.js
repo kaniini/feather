@@ -6,8 +6,13 @@ import App from './App'
 import router from './router'
 import messages from './i18n/messages'
 import APIService from './services/api'
+import VueTWEmoji from 'vue-twemoji'
 
 Vue.use(VueI18n)
+Vue.use(VueTWEmoji, {
+  extension: '.png',
+  size: '72x72'
+})
 
 const currentLocale = (window.navigator.language || 'en').split('-')[0]
 const i18n = new VueI18n({
@@ -26,6 +31,8 @@ Object.defineProperties(Vue.prototype, {
 window.fetch('/static/config.json')
   .then((res) => res.json())
   .then((res) => {
+    APIService.configure(res)
+
     /* eslint-disable no-new */
     new Vue({
       el: '#app',
@@ -36,8 +43,6 @@ window.fetch('/static/config.json')
       },
       template: '<App/>'
     })
-
-    APIService.configure(res)
   })
 
 export default EventBus

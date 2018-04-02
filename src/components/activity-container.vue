@@ -1,11 +1,11 @@
 <template>
   <div class="view">
     <span class="boosted" v-if="reblog">
-      <small><i class="icon-retweet"></i>{{ reblog.account.display_name }} {{$t('activity.boosted')}}</small>
+      <small><i class="icon-retweet"></i><span v-html="emojify(reblog.account.display_name)"></span> {{$t('activity.boosted')}}</small>
     </span>
 
     <div class="person">
-      <a :href="activity.account.url"><span class="author">{{ activity.account.display_name }}</span></a>
+      <a :href="activity.account.url"><span class="author" v-html="emojify(activity.account.display_name)"></span></a>
       <small> &mdash; @{{ activity.account.acct }}</small>
     </div>
 
@@ -20,7 +20,7 @@
           <MediaAttachment v-for="attachment in activity.media_attachments" v-bind:key="attachment.id" v-bind:attachment="attachment" v-bind:sensitive="activity.sensitive" />
         </div>
 
-        <div class="activity-content" v-html="activity.content"></div>
+        <div class="activity-content" v-html="emojify(activity.content)"></div>
       </div>
     </div>
 
@@ -64,6 +64,9 @@ export default {
         APIService.fetchChildren(this.activity.reblog ? this.activity.reblog.id : this.activity.id, this.receiveChildren)
       }
       this.replying = false
+    },
+    emojify (content) {
+      return this.$twemoji.parse(content)
     }
   },
   mounted () {
