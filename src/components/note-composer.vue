@@ -4,7 +4,7 @@
       <input type="text" :placeholder="$t('timeline.compose.content_advisory_text')" v-model="contentAdvisoryText">
     </div>
     <div>
-      <textarea :placeholder="$t('timeline.compose.placeholder')" v-model="message"></textarea>
+      <textarea :placeholder="$t('timeline.compose.placeholder')" v-model="message" @paste="processPaste"></textarea>
     </div>
     <div v-if="mediaObjects">
       <img :src="o.preview_url" v-for="o in mediaObjects" v-bind:key="o.id" class="media-preview">
@@ -104,6 +104,22 @@ export default {
           this.mediaIDs.push(resp.id)
           this.mediaObjects.push(resp)
         })
+    },
+    processPaste (event) {
+      for (let i = 0; i < event.clipboardData.items.length; i++) {
+        let item = event.clipboardData.items[i]
+        if (item.kind === 'file' && item.type.startsWith('image/')) {
+          event.preventDefault()
+
+          let file = item.getAsFile()
+          APIService.uploadMedia(file)
+            .then((resp) => {
+              event.target.files = null
+              this.mediaIDs.push(resp.id)
+              this.mediaObjects.push(resp)
+            })
+        }
+      }
     }
   },
   mounted () {
