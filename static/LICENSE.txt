@@ -6,7 +6,13 @@ Font license info
    Copyright (C) 2016 by Dave Gandy
 
    Author:    Dave Gandy
-   License:   SIL ()
+   License:   SIL (http://scripts.sil.org/OFL)
    Homepage:  http://fortawesome.github.com/Font-Awesome/
 
+## Open Sans
 
+   Copyright (C) 2010-2011 by Google Corporation
+
+   Author:    Steve Matteson
+   License:   Apache 2 (https://www.apache.org/licenses/LICENSE-2.0.html)
+   Homepage:  https://github.com/googlefonts/opensans
