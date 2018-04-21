@@ -3,8 +3,6 @@
     <LoginForm v-if="!isLoggedIn" />
     <IdentityWidget v-else-if="apActor != null" v-bind:actor="apActor" />
 
-    <SearchBox v-if="isLoggedIn" />
-
     <div class="module">
       <router-link to="/home" v-if="isLoggedIn">{{$t("timeline.home")}}</router-link>
       <router-link to="/public">{{$t("timeline.public")}}</router-link>
@@ -15,7 +13,6 @@
 <script>
 import LoginForm from './login-form'
 import IdentityWidget from './identity-widget'
-import SearchBox from './search-box'
 
 const Sidebar = {
   name: 'Sidebar',
@@ -23,7 +20,7 @@ const Sidebar = {
     return {isLoggedIn: false, apActor: null}
   },
   components: {
-    LoginForm, IdentityWidget, SearchBox
+    LoginForm, IdentityWidget
   },
   methods: {
     handleLoggedIn () { this.isLoggedIn = true },

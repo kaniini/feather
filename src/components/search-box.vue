@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div id="search-results" v-if="Object.keys(results).length > 0">
+    <div id="search-results" v-if="query !== ''">
       <div v-if="results.accounts.length > 0">
         <div class="search-results-header">{{ $t('sidebar.search-accounts') }} ({{ results.accounts.length }})</div>
         <div id="accounts">
@@ -60,15 +60,32 @@ export default {
 </script>
 
 <style scoped>
-#search-module > div {
-  margin-top: 1em;
-  margin-right: 1em;
+#search-module {
+  flex: 1;
+  margin-left: 0.5em;
+  max-width: 20em;
+  padding: 0.5em;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.0);
+  color: #333;
 }
 
 #search-box {
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid #999;
+}
+
+#search-results {
+  position: absolute;
+  top: 3em;
+  left: 17em;
+  padding: 0.5em;
+  background: #fff;
+  z-index: 999999;
+  border: 1px solid #999;
+  overflow-y: scroll;
+  height: 20em;
+  width: 20em;
 }
 
 .icon {
@@ -86,6 +103,7 @@ input {
   width: 100%;
   border: none;
   font-size: 75%;
+  background: transparent;
 }
 
 .search-results-header {
