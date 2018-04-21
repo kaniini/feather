@@ -4,7 +4,7 @@
     <button class="btn btn-small" v-on:click="like"><i class="icon-star"></i>{{ like_count }}</button>
     <button class="btn btn-small" v-on:click="announce"><i class="icon-retweet"></i>{{ announce_count }}</button>
     <button class="btn btn-small" v-on:click="reply"><i class="icon-reply"></i></button>
-    <router-link :to="{name: 'timeline.collection', params: {collection: activity.id}}" class="btn btn-small" v-if="!activity.in_reply_to_id">View collection</router-link>
+    <router-link :to="{name: 'timeline.collection', params: {collection: activity.id}}" class="btn btn-small" v-if="!activity.in_reply_to_id">{{$t('timeline.view_collection')}}</router-link>
   </div>
 </template>
 
