@@ -4,7 +4,13 @@ Feather is a [Pleroma](http://pleroma.social) frontend which resembles Facebook 
 
 ![Screenshot](https://i.imgur.com/YgCx2Z3.jpg)
 
-## Build Setup
+## Registering the OAuth App
+
+``` bash
+curl -XPOST -F client_name=Feather -F redirect_uris=urn:ietf:wg:oauth:2.0:oob -F 'scopes=read write follow' https://your.pleroma.instance/api/v1/apps
+```
+
+## Building
 
 Real instructions coming soon
 
