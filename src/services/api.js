@@ -39,11 +39,20 @@ let fetchAPActor = (info) => {
   })
 }
 
+let fetchSiteInfo = () => {
+  makeAPIRequest(`/api/statusnet/config.json`)
+    .then((response) => response.json())
+    .then((response) => {
+      EventBus.$emit('api.learned-site-info', response)
+    })
+}
+
 export default {
   configure (cfg) {
     API_BASE_URL = cfg.API_BASE_URL || ''
     CLIENT_ID = cfg.CLIENT_ID
     CLIENT_SECRET = cfg.CLIENT_SECRET
+    fetchSiteInfo()
   },
   login (user, pass) {
     return new Promise((resolve, reject) => {

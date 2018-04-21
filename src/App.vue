@@ -1,19 +1,24 @@
 <template>
   <div id="app">
-    <Sidebar/>
-    <div id="view">
-      <router-view/>
+    <Topbar/>
+    <div id="app-container">
+      <Sidebar/>
+      <div id="view">
+        <router-view/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Sidebar from './components/sidebar'
+import Topbar from './components/topbar'
 
 export default {
   name: 'App',
   components: {
-    Sidebar
+    Sidebar,
+    Topbar
   }
 }
 </script>
@@ -28,7 +33,18 @@ html, body {
   height: 100%;
 }
 
-#app {
+#topbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #34495e;
+  color: #eee;
+  z-index: 100000000;
+}
+
+#app-container {
+  margin-top: 45px;
+  flex: 1;
   display: flex;
   flex-direction: row;
   height: 100%;
