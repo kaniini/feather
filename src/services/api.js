@@ -4,6 +4,7 @@ const LOGIN_ENDPOINT = '/oauth/token'
 const TIMELINES_ENDPOINT = '/api/v1/timelines/'
 const STATUSES_ENDPOINT = '/api/v1/statuses'
 const MEDIA_ENDPOINT = '/api/v1/media'
+const SEARCH_ENDPOINT = '/api/v1/search'
 
 var TOKEN
 var AP_ACTOR
@@ -156,5 +157,9 @@ export default {
     }).then((response) => {
       return response.json()
     })
+  },
+  search (query) {
+    return makeAPIRequest(`${SEARCH_ENDPOINT}?q=${encodeURIComponent(query)}&resolve=true`)
+      .then((response) => response.json())
   }
 }

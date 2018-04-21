@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <ActivityContainer v-bind:reblog="activity.reblog ? activity : null" v-bind:activity="activity.reblog || activity" />
+    <ActivityContainer v-bind:reblog="activity.reblog ? activity : null" v-bind:activity="activity.reblog || activity" v-bind:show-children="showChildren" />
   </article>
 </template>
 
@@ -24,7 +24,7 @@ import ActivityContainer from './activity-container'
 export default {
   name: 'Activity',
   components: { ActivityContainer },
-  props: ['activity']
+  props: ['activity', 'showChildren']
 }
 </script>
 

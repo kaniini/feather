@@ -4,6 +4,13 @@ const en = {
     'username': 'Username (e.g. kaniini)',
     'password': 'Password'
   },
+  'sidebar': {
+    'search': 'Search',
+    'search-results': 'Results',
+    'search-accounts': 'Accounts',
+    'search-hashtags': 'Hashtags',
+    'search-statuses': 'Posts'
+  },
   'activity': {
     'boosted': 'boosted',
     'liked': 'liked',

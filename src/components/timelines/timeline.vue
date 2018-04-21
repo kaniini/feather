@@ -1,6 +1,6 @@
 <template>
   <div class="timeline">
-    <Activity v-for="activity in timeline" v-bind:key="activity.id" v-bind:activity="activity" />
+    <Activity v-for="activity in timeline" v-bind:key="activity.id" v-bind:activity="activity" v-bind:show-children="true" />
   </div>
 </template>
 

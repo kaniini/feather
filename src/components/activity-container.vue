@@ -26,7 +26,7 @@
 
     <ActionBar v-bind:activity="activity" v-if="isLoggedIn" />
 
-    <div class="children" v-if="children">
+    <div class="children" v-if="showChildren && children">
       <ChildActivity v-for="child in children" v-bind:key="child.id" v-bind:activity="child" />
     </div>
 
@@ -44,7 +44,7 @@ import ActionBar from './action-bar'
 export default {
   name: 'ActivityContainer',
   components: { MediaAttachment, ChildActivity, ReplyComposer, ActionBar },
-  props: ['activity', 'reblog'],
+  props: ['activity', 'reblog', 'showChildren'],
   data () {
     return {
       children: [],
@@ -70,7 +70,10 @@ export default {
     }
   },
   mounted () {
-    APIService.fetchChildren(this.activity.reblog ? this.activity.reblog.id : this.activity.id, this.receiveChildren)
+    if (this.showChildren) {
+      APIService.fetchChildren(this.activity.reblog ? this.activity.reblog.id : this.activity.id, this.receiveChildren)
+    }
+
     this.$bus.$on('api.posted-message', this.handleUpdate)
     this.$bus.$on('activity.replying', (activity) => {
       let ourId = this.activity.reblog ? this.activity.reblog.id : this.activity.id
