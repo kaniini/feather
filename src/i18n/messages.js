@@ -27,7 +27,8 @@ const en = {
       'submit': 'Submit',
       'content_advisory': 'Content Advisory',
       'content_advisory_text': 'Write your content advisory here'
-    }
+    },
+    'media-view': 'Toggle media-only view'
   }
 }
 const nb = {
@@ -59,7 +60,8 @@ const nb = {
       'submit': 'Legg ut',
       'content_advisory': 'Innholds-rådgivning',
       'content_advisory_text': 'Skriv innholds-rådgivningen din her'
-    }
+    },
+    'media-view': 'Veksle mellom å bare vise media'
   }
 }
 
