@@ -33,6 +33,12 @@ article {
   margin-bottom: 1em;
   display: flex;
   flex-direction: row;
+  border: 1px solid #ddd;
+  padding: 1em;
+  max-width: 80%;
+  border-radius: 4px;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
 

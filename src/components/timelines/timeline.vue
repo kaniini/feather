@@ -38,5 +38,7 @@ export default {
 <style scoped>
 .timeline {
   clear: both;
+  max-width: 90%;
+  margin: auto;
 }
 </style>
