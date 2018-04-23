@@ -1,11 +1,9 @@
 <template>
   <div id="app">
     <Topbar/>
-    <div id="app-container">
-      <Sidebar/>
-      <div id="view">
-        <router-view/>
-      </div>
+    <Sidebar/>
+    <div id="view">
+      <router-view/>
     </div>
   </div>
 </template>
@@ -33,6 +31,12 @@ html, body {
   height: 100%;
 }
 
+#app {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
 #topbar {
   position: fixed;
   top: 0;
@@ -42,24 +46,16 @@ html, body {
   z-index: 100000000;
 }
 
-#app-container {
-  margin-top: 45px;
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-}
-
 #sidebar {
   flex: 1;
   max-width: 15em;
   border-right: 1px #999 solid;
-  padding-top: 1em;
+  padding-top: 64px;
   padding-left: 1em;
 }
 
 #view {
-  padding: 1em;
+  padding: 64px 1em;
   flex: 1;
   overflow-y: scroll;
 }
