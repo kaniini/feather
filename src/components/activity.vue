@@ -35,7 +35,7 @@ article {
   flex-direction: row;
   border: 1px solid #ddd;
   padding: 1em;
-  max-width: 80%;
+  max-width: 65%;
   border-radius: 4px;
   margin-left: auto;
   margin-right: auto;
@@ -75,5 +75,9 @@ article {
 .avatar-overlay-overlay img {
   width: 24px;
   height: 24px;
+}
+
+.view {
+  width: 100%;
 }
 </style>

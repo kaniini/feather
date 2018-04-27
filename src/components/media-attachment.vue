@@ -12,11 +12,17 @@ export default {
 
 <style scoped>
 .attachment {
-  float: left;
+  display: inline-block;
+  width: 50%;
+}
+
+.media-attachments {
+  display: inline-block;
+  max-width: 50%;
 }
 
 img {
-  height: 300px;
-  padding-right: 4px;
+  min-height: 300px;
+  width: 98%;
 }
 </style>

@@ -22,7 +22,7 @@
 
 <style scoped>
 form {
-  width: 100%;
+  max-width: 100%;
   min-width: 30em;
   margin-bottom: 2em;
   border-radius: 0.5em;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="actions">
     <span class="visibility">{{ activity.visibility }}</span> &mdash;
     <button class="btn btn-small" v-on:click="like"><i class="icon-star"></i>{{ like_count }}</button>
     <button class="btn btn-small" v-on:click="announce"><i class="icon-retweet"></i>{{ announce_count }}</button>
@@ -53,6 +53,10 @@ export default {
 div {
   font-size: 75%;
   color: #999;
+}
+
+.actions {
+  margin-top: 10px;
 }
 
 .visibility {

@@ -32,5 +32,7 @@ export default {
 .view {
   font-size: 75%;
   margin-top: 0.6em;
+  width: 100%;
 }
+
 </style>

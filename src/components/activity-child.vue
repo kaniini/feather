@@ -30,5 +30,11 @@ small {
 
 .children {
   margin-top: 1em;
+  width: 100%;
+}
+
+.child-activity {
+  border-top: 1px solid #ddd;
+  padding-top: 1em;
 }
 </style>
