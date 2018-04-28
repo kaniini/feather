@@ -49,9 +49,10 @@ html, body {
 #sidebar {
   flex: 1;
   max-width: 15em;
-  border-right: 1px #999 solid;
   padding-top: 64px;
   padding-left: 1em;
+  background: #ededed;
+  text-shadow: 1px 1px 0px #fff;
 }
 
 #view {
