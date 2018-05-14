@@ -6,6 +6,12 @@
 .icon-trash-empty:before { content: '\e804'; } /* '' */
 .icon-upload:before { content: '\e805'; } /* '' */
 .icon-search:before { content: '\e806'; } /* '' */
+.icon-globe:before { content: '\e807'; } /* '' */
+.icon-users:before { content: '\e808'; } /* '' */
+.icon-home:before { content: '\e809'; } /* '' */
+.icon-link:before { content: '\e80a'; } /* '' */
+.icon-location:before { content: '\e80b'; } /* '' */
+.icon-bell-alt:before { content: '\f0f3'; } /* '' */
 .icon-reply:before { content: '\f112'; } /* '' */
 .icon-user-plus:before { content: '\f234'; } /* '' */
 .icon-user-times:before { content: '\f235'; } /* '' */
