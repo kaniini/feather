@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Composer v-if="isLoggedIn" />
+    <div id="composer-container">
+      <Composer v-if="isLoggedIn" id="composer" />
+    </div>
+
     <Timeline tid="home" type="timeline" />
   </div>
 </template>
@@ -26,3 +29,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+#composer-container {
+  max-width: 90%;
+  margin: auto;
+}
+
+#composer {
+  max-width: 65%;
+  margin: auto;
+}
+</style>
