@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <img :src="actor.icon.url"><span id="actor-username">@{{ actor.preferredUsername }}</span>
-  </div>
+  <span>
+    <img :src="actor.icon.url"> {{ actor.preferredUsername }}
+  </span>
 </template>
 
 <script>
@@ -12,21 +12,12 @@ export default {
 </script>
 
 <style scoped>
-div {
-  height: 48px;
-  margin-top: auto;
-  margin-bottom: auto;
+span {
+  padding-left: 1em;
 }
 
 img {
-  width: 48px;
-  border-radius: 0.5em;
-  float: left;
-}
-
-#actor-username {
-  margin-top: 10px;
-  margin-left: 5px;
-  display: inline-block;
+  width: 1em;
+  border-radius: 1em;
 }
 </style>

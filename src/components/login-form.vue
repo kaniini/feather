@@ -1,7 +1,10 @@
 <template>
   <div class="login" v-if="!loggedIn">
-    <h4>{{$t('login.login')}}</h4>
-    <form v-on:submit.prevent="submit(user)" class="login-form">
+    <button v-on:click.prevent="toggleLogin" class="btn btn-topbar">{{$t('login.login')}}</button>
+
+    <form v-on:submit.prevent="submit(user)" id="login-form" v-if="shouldLogIn">
+      <h4>{{$t('login.login')}}</h4>
+
       <div class="form-group">
         <input v-model="user.username" class="form-control" id="username" :placeholder="$t('login.username')">
       </div>
@@ -23,7 +26,8 @@ export default {
   data: () => ({
     user: {},
     authError: null,
-    loggedIn: false
+    loggedIn: false,
+    shouldLogIn: false
   }),
   methods: {
     submit () {
@@ -34,6 +38,9 @@ export default {
         console.log('login error', err)
         this.authError = err
       })
+    },
+    toggleLogin () {
+      this.shouldLogIn ^= true
     }
   }
 }
@@ -41,18 +48,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+.btn-topbar {
+  padding: 0.5em;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+#login-form {
+  position: absolute;
+  top: 3em;
+  background: #fff;
+  color: #333;
+  width: 9em;
+  border: 1px solid #333;
+  padding: 0.5em;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+.form-group {
+  margin-bottom: 0.25em;
 }
 </style>

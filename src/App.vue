@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <Topbar/>
-    <Sidebar/>
     <div id="view">
       <router-view/>
     </div>
@@ -9,13 +8,11 @@
 </template>
 
 <script>
-import Sidebar from './components/sidebar'
 import Topbar from './components/topbar'
 
 export default {
   name: 'App',
   components: {
-    Sidebar,
     Topbar
   }
 }
@@ -32,8 +29,6 @@ html, body {
 }
 
 #app {
-  display: flex;
-  flex-direction: row;
   height: 100%;
 }
 
@@ -57,6 +52,8 @@ html, body {
 
 #view {
   padding: 64px 1em;
+  width: 90%;
+  margin: auto;
   flex: 1;
   overflow-y: scroll;
 }

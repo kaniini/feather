@@ -78,7 +78,7 @@ export default {
 #search-results {
   position: absolute;
   top: 3em;
-  left: 17em;
+  margin-left: -0.5em;
   padding: 0.5em;
   background: #fff;
   z-index: 999999;
