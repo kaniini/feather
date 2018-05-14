@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Timeline tid="public" type="timeline" />
+    <Timeline tid="public" local="true" type="timeline" />
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import Timeline from './timeline'
 
 export default {
-  name: 'Public',
+  name: 'Local',
   components: {
     Timeline
   }

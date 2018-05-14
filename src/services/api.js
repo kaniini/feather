@@ -81,8 +81,11 @@ export default {
       })
     })
   },
-  fetchTimeline (timeline, callback, since) {
+  fetchTimeline (timeline, local, callback, since) {
     let uri = `${TIMELINES_ENDPOINT}/${timeline}?limit=150`
+    if (local) {
+      uri += '&local=true'
+    }
     if (since) {
       uri += '&since_id=' + since
     }

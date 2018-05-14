@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>{{$t('timeline.home')}}</h2>
     <Composer v-if="isLoggedIn" />
     <Timeline tid="home" type="timeline" />
   </div>

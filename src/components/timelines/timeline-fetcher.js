@@ -1,14 +1,15 @@
 import APIService from '../../services/api'
 
 class TimelineFetcher {
-  constructor (timeline, type, callback) {
+  constructor (timeline, type, local, callback) {
     this.timeline = timeline
     this.callback = callback
+    this.local = local
     this.type = type
   }
 
   fetchTimeline (withReplies) {
-    return APIService.fetchTimeline(this.timeline, (activities) => {
+    return APIService.fetchTimeline(this.timeline, this.local, (activities) => {
       if (withReplies) {
         return this.callback(activities)
       }
